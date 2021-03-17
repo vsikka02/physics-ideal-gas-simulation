@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
+#include "particle.h"
 
 using glm::vec2;
 
@@ -13,9 +14,20 @@ namespace idealgas {
 class GasContainer {
  public:
   /**
-   * TODO: Add more parameters to this constructor, and add documentation.
+   * These 2 constants are used to generate the size of the rectangle that
+   * represents the container for all of the gas particle. kOutOfBounds1
+   * represents the top-left corner of the gas container. and the kOutOfBounds2
+   * represents the lower-right corner for the rectangle gas container.
    */
-  GasContainer();
+  const vec2 kOutOfBounds1 = vec2(100, 100);
+  const vec2 kOutOfBounds2 = vec2(650, 650);
+
+  /**
+   * This is the constructor for the container. This takes in the amount of
+   * gas-particles that you want inside the simulation and will place all of
+   * these particles at random locations with random velocities.
+   */
+  GasContainer(int number_particles);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -27,13 +39,15 @@ class GasContainer {
    * described in the assignment documentation).
    */
   void AdvanceOneFrame();
+  std::vector<idealgas::Particle> GetParticleVector();
 
  private:
   /**
-   * This variable is just for the purposes of demonstrating how to make a shape move
-   * across a screen. Please remove it once you start working on your code.
+   * This variable holds all the particles that need to be updated and checked
+   * for collisions with walls and each other. This stores all the particles that
+   * are inside the gas chamber.
    */
-  int dummy_variable_ = 0;
+  std::vector<idealgas::Particle> particle_vector_;
 };
 
 }  // namespace idealgas
