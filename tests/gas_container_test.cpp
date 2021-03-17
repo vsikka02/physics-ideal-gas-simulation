@@ -7,13 +7,13 @@ using idealgas::GasContainer;
 using idealgas::Particle;
 
 TEST_CASE("Check Constructor") {
+  SECTION("Invalid Size of Particle") {
+    REQUIRE_THROWS_AS(GasContainer(-1), std::invalid_argument);
+  }
+
   SECTION("Size of particle") {
     GasContainer gas_container = GasContainer(20);
     REQUIRE(gas_container.GetParticleVector().size() == 20);
-  }
-
-  SECTION("Invalid Size of Particle") {
-    REQUIRE_THROWS_AS(GasContainer(-1), std::invalid_argument);
   }
 }
 
