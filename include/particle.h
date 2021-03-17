@@ -38,7 +38,7 @@ class Particle {
   /**
    * This functions intakes the bounds of the rectangle that the particles will
    * be stored in and will update the velocity based off of whether a given
-   * particle has hit the container's walls.
+   * particle hit the container's walls.
    */
   void UpdateVelocityAfterWallCollision(const glm::vec2& bounds_1, const glm::vec2& bounds_2);
 

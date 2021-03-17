@@ -15,8 +15,8 @@ Particle::Particle(const vec2& position, const vec2& velocity,
   position_ = position;
   velocity_ = velocity;
   color_ = color;
-  mass_ = mass;
   radius_ = radius;
+  mass_ = mass;
 }
 
 int Particle::GetRadius() const {
