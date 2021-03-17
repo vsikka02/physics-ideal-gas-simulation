@@ -13,7 +13,8 @@ class Particle {
    * This constructs a single particle that takes in a vector for the position,
    * vector for velocity, a color, a mass, and a radius to generate a particle.
    */
-  Particle(const glm::vec2& position, const glm::vec2& velocity, const ci::Color& color, const float& mass_, const int& radius_);
+  Particle(const glm::vec2& position, const glm::vec2& velocity,
+           const ci::Color& color, const float& mass_, const int& radius_);
 
   /**Return the color of a particle.**/
   ci::Color GetColor() const;
@@ -40,7 +41,8 @@ class Particle {
    * be stored in and will update the velocity based off of whether a given
    * particle hit the container's walls.
    */
-  void UpdateVelocityAfterWallCollision(const glm::vec2& bounds_1, const glm::vec2& bounds_2);
+  void UpdateVelocityAfterWallCollision(const glm::vec2& bounds_1,
+                                        const glm::vec2& bounds_2);
 
   /**Return the mass of the particle.**/
   float GetMass() const;
@@ -65,4 +67,4 @@ class Particle {
   float mass_;
   int radius_;
 };
-}
+}  // namespace idealgas
