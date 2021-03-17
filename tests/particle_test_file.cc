@@ -6,18 +6,18 @@ using glm::vec2;
 using idealgas::Particle;
 
 TEST_CASE("Particle Position Test") {
-  SECTION("Particle Move") {
-    Particle particle =
-        Particle(vec2(150, 150), vec2(1, 1), ci::Color("blue"), 0, 10);
-    particle.UpdatePosition();
-    REQUIRE(particle.GetPosition() == vec2(151, 151));
-  }
-
   SECTION("Particle Move Down") {
     Particle particle =
         Particle(vec2(150, 150), vec2(0, -1), ci::Color("blue"), 0, 10);
     particle.UpdatePosition();
     REQUIRE(particle.GetPosition() == vec2(150, 149));
+  }
+
+  SECTION("Particle Move") {
+    Particle particle =
+        Particle(vec2(150, 150), vec2(1, 1), ci::Color("blue"), 0, 10);
+    particle.UpdatePosition();
+    REQUIRE(particle.GetPosition() == vec2(151, 151));
   }
 
   SECTION("Particle Move Up") {
