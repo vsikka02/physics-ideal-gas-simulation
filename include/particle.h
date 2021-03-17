@@ -32,7 +32,7 @@ class Particle {
    */
   void UpdatePosition();
 
-  /**Return the size of the radius.**/
+  /**Return the radius size.**/
   int GetRadius() const;
 
   /**

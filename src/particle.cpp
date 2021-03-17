@@ -73,14 +73,14 @@ void Particle::SetCollidedVelocity(Particle& particle) {
 
 void Particle::UpdateVelocityAfterWallCollision(const vec2& bounds_1,
                                                 const vec2& bounds_2) {
-  if (position_.x - radius_ <= bounds_1.x ||
-      position_.x + radius_ >= bounds_2.x) {
-    velocity_ = vec2(-velocity_.x, velocity_.y);
-  }
-
   if (position_.y - radius_ <= bounds_1.y ||
       position_.y + radius_ >= bounds_2.y) {
     velocity_ = vec2(velocity_.x, -velocity_.y);
+  }
+
+  if (position_.x - radius_ <= bounds_1.x ||
+      position_.x + radius_ >= bounds_2.x) {
+    velocity_ = vec2(-velocity_.x, velocity_.y);
   }
 
   return;
