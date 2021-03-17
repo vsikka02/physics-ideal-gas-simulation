@@ -67,8 +67,8 @@ void Particle::SetCollidedVelocity(Particle& particle) {
              ((glm::length(x_2 - x_1)) * glm::length(x_2 - x_1))) *
                 (x_2 - x_1);
 
-  velocity_ = collided_velocity_1;
   particle.SetVelocity(collided_velocity_2);
+  velocity_ = collided_velocity_1;
 }
 
 void Particle::UpdateVelocityAfterWallCollision(const vec2& bounds_1,

@@ -11,7 +11,7 @@ class Particle {
  public:
   /**
    * This constructs a single particle that takes in a vector for the position,
-   * vector for velocity, a color, a mass, and a radius.
+   * vector for velocity, a color, a mass, and a radius to generate a particle.
    */
   Particle(const glm::vec2& position, const glm::vec2& velocity, const ci::Color& color, const float& mass_, const int& radius_);
 
