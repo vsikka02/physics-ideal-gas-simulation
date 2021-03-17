@@ -25,7 +25,7 @@ class Particle {
   /**Return the velocity vector of a particle.**/
   glm::vec2 GetVelocity() const;
 
-  /**Sets the velocity of the particle.**/
+  /**Sets the velocity vector of the particle.**/
   void SetVelocity(const glm::vec2& velocity);
 
   /**This is repeatedly called in order to add the velocity vector to the

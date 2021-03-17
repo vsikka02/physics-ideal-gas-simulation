@@ -17,7 +17,7 @@ class GasContainer {
    * These 2 constants are used to generate the size of the rectangle that
    * represents the container for all of the gas particle. kOutOfBounds1
    * represents the top-left corner of the gas container. and the kOutOfBounds2
-   * represents the lower-right corner for the rectangle gas container.
+   * represents the lower-right corner of the rectangular gas container.
    */
   const vec2 kOutOfBounds1 = vec2(100, 100);
   const vec2 kOutOfBounds2 = vec2(650, 650);
