@@ -14,15 +14,44 @@ namespace idealgas {
 
 class Histogram {
  public:
+
+  /** This constructs a histogram object that plots the speed of the particles
+   * at the location described by line bounds and for the particles that are passed
+   * in as the particles vector. **/
   Histogram(std::vector<Particle> particles, vec2 line_bound_1, vec2 line_bound_2, ci::Color color, std::string title);
+
+  /** This method draws out the histogram with the Axes, Labels and the
+   * bars for the histogram plot. **/
   void DrawHistogram() const;
+
+  /** This Creates the Axes and the Labels that are needed with the necessary
+   * labels for the graph. **/
   void DrawAxesAndLabels() const;
+
+  /** This updates the bin_heights_ vector based on the new speeds of the vector
+   * of particles that is passed through. **/
   std::vector<int> UpdateHistogram();
+
+  /** This calculates the Maximum speed that is present within the particles
+   * vector in order to decide what the ranges on the x-axis will be. **/
   float FindMaximumSpeed() const;
+
+  /** Calculates the largest number of particles that are present in a bin. This
+   * is mainly used to set the y-axis labels. **/
   int FindMaximumNumberOfParticlesInBin() const;
+
+  /** This draws the tick marks that are present on the x and y axis of the
+   * graphs and is dynamically updated based on the maximum bin size and the
+   * maximum speed.**/
   void DrawTickMarks() const;
+
+  /** Getter for the Particles Vector. **/
   std::vector<Particle> particles() const;
+
+  /** Getter for the Bin Heights Vector. **/
   std::vector<int> bin_heights() const;
+
+  /** Setter for the Bin Heights vector. Mainly used to make testing easier. **/
   void set_bin_heights(std::vector<int> bin_heights);
 
  private:
@@ -32,6 +61,9 @@ class Histogram {
   std::vector<int> bin_heights_;
   ci::Color color_;
   std::string title_;
+
+  /** Number of Bins that are present in histogram. For Testing this variable
+   * must be set to 5 or else testing will fail. **/
   const int kNumberOfBins = 5;
 };
 }
