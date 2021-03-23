@@ -33,9 +33,14 @@ class GasContainer {
   void AdvanceOneFrame();
   std::vector<idealgas::Particle> GetAllParticles();
 
-  void CreateSizeVectors();
+  void set_size_vectors();
 
-  void CreateHistograms();
+  void set_histogram_vector();
+
+  std::vector<Particle> small_particles();
+  std::vector<Particle> medium_particles();
+  std::vector<Particle> large_particles();
+  std::vector<Histogram> histograms();
 
  private:
   /**

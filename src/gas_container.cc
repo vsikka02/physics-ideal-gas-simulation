@@ -50,8 +50,8 @@ void GasContainer::Display() const {
   ci::gl::drawStrokedRect(ci::Rectf(kOutOfBounds1, kOutOfBounds2));
 
   for (Particle particle : all_particles_) {
-    ci::gl::color(particle.GetColor());
-    ci::gl::drawSolidCircle(vec2(particle.GetPosition()), particle.GetRadius());
+    ci::gl::color(particle.color());
+    ci::gl::drawSolidCircle(vec2(particle.position()), particle.radius());
   }
 
   for (Histogram histogram: histograms_) {
@@ -61,20 +61,20 @@ void GasContainer::Display() const {
 
 void GasContainer::AdvanceOneFrame() {
   for (Particle& particle : all_particles_) {
-    particle.UpdateVelocityAfterWallCollision(kOutOfBounds1, kOutOfBounds2);
+    particle.set_velocity_after_wall_collision(kOutOfBounds1, kOutOfBounds2);
     particle.UpdatePosition();
   }
 
   for (size_t i = 0; i < all_particles_.size() - 1; i++) {
     for (size_t j = i + 1; j < all_particles_.size(); j++) {
       if (all_particles_[i].IsColliding(all_particles_[j])) {
-        all_particles_[i].SetCollidedVelocity(all_particles_[j]);
+        all_particles_[i].set_collided_velocity(all_particles_[j]);
       }
     }
   }
 
-  CreateSizeVectors();
-  CreateHistograms();
+  set_size_vectors();
+  set_histogram_vector();
 
   for (Histogram& histogram : histograms_) {
     histogram.UpdateHistogram();
@@ -85,23 +85,23 @@ std::vector<Particle> GasContainer::GetAllParticles() {
   return all_particles_;
 }
 
-void GasContainer::CreateSizeVectors() {
+void GasContainer::set_size_vectors() {
   large_particles_.clear();
   medium_particles_.clear();
   small_particles_.clear();
 
   for (Particle particle: all_particles_) {
-    if (particle.GetRadius() == kLargeParticleRadius) {
+    if (particle.radius() == kLargeParticleRadius) {
       large_particles_.push_back(particle);
-    } else if (particle.GetRadius() == kMediumParticleRadius) {
+    } else if (particle.radius() == kMediumParticleRadius) {
       medium_particles_.push_back(particle);
-    } else if (particle.GetRadius() == kSmallParticleRadius) {
+    } else if (particle.radius() == kSmallParticleRadius) {
       small_particles_.push_back(particle);
     }
   }
 }
 
-void GasContainer::CreateHistograms() {
+void GasContainer::set_histogram_vector() {
   histograms_.clear();
 
   histograms_.push_back(Histogram(small_particles_, vec2(45, 500), vec2(245, 700), kSmallParticleColor, "Small Particles Histogram"));
@@ -109,4 +109,20 @@ void GasContainer::CreateHistograms() {
   histograms_.push_back(Histogram(large_particles_, vec2(545, 500), vec2(745, 700), kLargeParticleColor, "Large Particles Histogram"));
 }
 
+
+vector<Particle> GasContainer::small_particles() {
+  return small_particles_;
+}
+
+vector<Particle> GasContainer::medium_particles() {
+  return medium_particles_;
+}
+
+vector<Particle> GasContainer::large_particles() {
+  return large_particles_;
+}
+
+vector<Histogram> GasContainer::histograms() {
+  return histograms_;
+}
 }  // namespace idealgas
