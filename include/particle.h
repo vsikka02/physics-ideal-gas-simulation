@@ -4,9 +4,9 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
-// IDEAL_GAS_PARTICLE_H
 
 namespace idealgas {
+
 class Particle {
  public:
   /**

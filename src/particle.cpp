@@ -52,20 +52,22 @@ void Particle::SetCollidedVelocity(Particle& particle) {
   vec2 v_2 = particle.GetVelocity();
   vec2 x_1 = position_;
   vec2 x_2 = particle.GetPosition();
+  float m_1 = mass_;
+  float m_2 = particle.GetMass();
 
   if (glm::dot(v_1 - v_2, x_1 - x_2) >= 0) {
-    return;
+    throw std::invalid_argument("Particles are not moving towards each other!");
   }
 
   vec2 collided_velocity_1 =
-      v_1 - (glm::dot((v_1 - v_2), (x_1 - x_2)) /
+      v_1 - ((2*m_2/(m_1 + m_2)) * (glm::dot((v_1 - v_2), (x_1 - x_2)) /
              ((glm::length(x_1 - x_2)) * glm::length(x_1 - x_2))) *
-                (x_1 - x_2);
+                (x_1 - x_2));
 
   vec2 collided_velocity_2 =
-      v_2 - (glm::dot((v_2 - v_1), (x_2 - x_1)) /
+      v_2 - ((2 * m_1/(m_1 + m_2)) * (glm::dot((v_2 - v_1), (x_2 - x_1)) /
              ((glm::length(x_2 - x_1)) * glm::length(x_2 - x_1))) *
-                (x_2 - x_1);
+                (x_2 - x_1));
 
   particle.SetVelocity(collided_velocity_2);
   velocity_ = collided_velocity_1;
@@ -87,8 +89,8 @@ void Particle::UpdateVelocityAfterWallCollision(const vec2& bounds_1,
 }
 
 bool Particle::IsColliding(const Particle& particle) const {
-  if (glm::distance(position_, particle.GetPosition()) <=
-      radius_ + particle.GetRadius()) {
+  if (glm::distance(position_, particle.GetPosition()) <= radius_ + particle.GetRadius()
+      && glm::dot(velocity_ - particle.GetVelocity(), position_ - particle.GetPosition()) < 0) {
     return true;
   }
 
