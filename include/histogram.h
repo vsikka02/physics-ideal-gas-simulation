@@ -17,10 +17,13 @@ class Histogram {
   Histogram(std::vector<Particle> particles, vec2 line_bound_1, vec2 line_bound_2, ci::Color color, std::string title);
   void DrawHistogram() const;
   void DrawAxesAndLabels() const;
-  void UpdateHistogram();
-  float GetMaximumSpeed() const;
-  int GetMaximumNumberOfParticlesInABin() const;
+  std::vector<int> UpdateHistogram();
+  float FindMaximumSpeed() const;
+  int FindMaximumNumberOfParticlesInBin() const;
   void DrawTickMarks() const;
+  std::vector<Particle> particles() const;
+  std::vector<int> bin_heights() const;
+  void set_bin_heights(std::vector<int> bin_heights);
 
  private:
   std::vector<Particle> particles_;
@@ -29,7 +32,7 @@ class Histogram {
   std::vector<int> bin_heights_;
   ci::Color color_;
   std::string title_;
-  const int kNumberOfBins = 8;
+  const int kNumberOfBins = 5;
 };
 }
 //namespace idealgas
