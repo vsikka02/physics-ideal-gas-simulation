@@ -2,10 +2,9 @@
 
 namespace idealgas {
 
-std::vector<size_t> particle_numbers {20,10,10};
+std::vector<size_t> particle_numbers{20, 10, 10};
 
-IdealGasApp::IdealGasApp()
-    : container_(GasContainer(particle_numbers)) {
+IdealGasApp::IdealGasApp() : container_(GasContainer(particle_numbers)) {
   ci::app::setWindowSize(kWindowSize, kWindowSize);
 }
 

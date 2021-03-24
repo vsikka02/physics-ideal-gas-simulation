@@ -33,16 +33,21 @@ class GasContainer {
   void AdvanceOneFrame();
   std::vector<idealgas::Particle> GetAllParticles();
 
+  /** Sets the vectors based on their radius size provided by the constants. **/
   void set_size_vectors();
 
+  /** Sets the histogram vector full of histogram objects with the necessary
+   * information. **/
   void set_histogram_vector();
 
+ private:
+  /** These are the size vectors and the histogram vectors. **/
   std::vector<Particle> small_particles();
   std::vector<Particle> medium_particles();
   std::vector<Particle> large_particles();
   std::vector<Histogram> histograms();
 
- private:
+
   /**
    * This variable holds all the particles that need to be updated and checked
    * for collisions with walls and each other. This stores all the particles that
@@ -62,6 +67,9 @@ class GasContainer {
  */
   const vec2 kOutOfBounds1 = vec2(100, 25);
   const vec2 kOutOfBounds2 = vec2(700, 425);
+
+  /** These are all of the constants that are set for having 3 different sized
+   * particle objects. These can be changed. **/
   const int kLargeParticleRadius = 10;
   const int kMediumParticleRadius = 7;
   const int kSmallParticleRadius = 5;

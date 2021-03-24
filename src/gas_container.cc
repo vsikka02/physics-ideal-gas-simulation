@@ -1,6 +1,5 @@
 #include "gas_container.h"
 
-
 namespace idealgas {
 
 using glm::vec2;
@@ -13,15 +12,17 @@ GasContainer::GasContainer(std::vector<size_t> num_different_particles) {
 
   std::srand(std::time(nullptr));
 
-  for (size_t i = 0; i <  num_different_particles.size(); i++) {
+  for (size_t i = 0; i < num_different_particles.size(); i++) {
     for (size_t j = 0; j < num_different_particles[i]; j++) {
-      int x_position = rand() % static_cast<size_t>(kOutOfBounds2.x -
-                                                 kOutOfBounds1.x - 2 * kLargeParticleRadius) +
-                       kOutOfBounds1.x + kLargeParticleRadius;
+      int x_position =
+          rand() % static_cast<size_t>(kOutOfBounds2.x - kOutOfBounds1.x -
+                                       2 * kLargeParticleRadius) +
+          kOutOfBounds1.x + kLargeParticleRadius;
 
-      int y_position = rand() % static_cast<size_t>(kOutOfBounds2.y -
-                                                 kOutOfBounds1.y - 2 * kLargeParticleRadius) +
-                       kOutOfBounds1.y + kLargeParticleRadius;
+      int y_position =
+          rand() % static_cast<size_t>(kOutOfBounds2.y - kOutOfBounds1.y -
+                                       2 * kLargeParticleRadius) +
+          kOutOfBounds1.y + kLargeParticleRadius;
 
       float x_velocity =
           (static_cast<float>(rand() % 100) / static_cast<float>(25)) - 2.0;
@@ -30,14 +31,26 @@ GasContainer::GasContainer(std::vector<size_t> num_different_particles) {
           (static_cast<float>(rand() % 100) / static_cast<float>(25)) - 2.0;
 
       if (i == 0) {
-        Particle particle = Particle(vec2(x_position, y_position), vec2(x_velocity, y_velocity), kSmallParticleColor, kSmallParticleMass, kSmallParticleRadius);
+        Particle particle = Particle(
+            vec2(x_position, y_position), vec2(x_velocity, y_velocity),
+            kSmallParticleColor, kSmallParticleMass, kSmallParticleRadius);
+
         all_particles_.push_back(particle);
+
       } else if (i == 1) {
-        Particle particle = Particle(vec2(x_position, y_position), vec2(x_velocity, y_velocity), kMediumParticleColor, kMediumParticleMass, kMediumParticleRadius);
+        Particle particle = Particle(
+            vec2(x_position, y_position), vec2(x_velocity, y_velocity),
+            kMediumParticleColor, kMediumParticleMass, kMediumParticleRadius);
+
         all_particles_.push_back(particle);
+
       } else if (i == 2) {
-        Particle particle = Particle(vec2(x_position, y_position), vec2(x_velocity, y_velocity), kLargeParticleColor, kLargeParticleMass, kLargeParticleRadius);
+        Particle particle = Particle(
+            vec2(x_position, y_position), vec2(x_velocity, y_velocity),
+            kLargeParticleColor, kLargeParticleMass, kLargeParticleRadius);
+
         all_particles_.push_back(particle);
+
       }
     }
   }
@@ -54,7 +67,7 @@ void GasContainer::Display() const {
     ci::gl::drawSolidCircle(vec2(particle.position()), particle.radius());
   }
 
-  for (Histogram histogram: histograms_) {
+  for (Histogram histogram : histograms_) {
     histogram.DrawHistogram();
   }
 }
@@ -90,7 +103,7 @@ void GasContainer::set_size_vectors() {
   medium_particles_.clear();
   small_particles_.clear();
 
-  for (Particle particle: all_particles_) {
+  for (Particle particle : all_particles_) {
     if (particle.radius() == kLargeParticleRadius) {
       large_particles_.push_back(particle);
     } else if (particle.radius() == kMediumParticleRadius) {
@@ -104,11 +117,18 @@ void GasContainer::set_size_vectors() {
 void GasContainer::set_histogram_vector() {
   histograms_.clear();
 
-  histograms_.push_back(Histogram(small_particles_, vec2(45, 500), vec2(245, 700), kSmallParticleColor, "Small Particles Histogram"));
-  histograms_.push_back(Histogram(medium_particles_, vec2(295, 500), vec2(495, 700), kMediumParticleColor, "Medium Particles Histogram"));
-  histograms_.push_back(Histogram(large_particles_, vec2(545, 500), vec2(745, 700), kLargeParticleColor, "Large Particles Histogram"));
-}
+  histograms_.push_back(Histogram(small_particles_, vec2(45, 500),
+                                  vec2(245, 700), kSmallParticleColor,
+                                  "Small Particles Histogram"));
 
+  histograms_.push_back(Histogram(medium_particles_, vec2(295, 500),
+                                  vec2(495, 700), kMediumParticleColor,
+                                  "Medium Particles Histogram"));
+
+  histograms_.push_back(Histogram(large_particles_, vec2(545, 500),
+                                  vec2(745, 700), kLargeParticleColor,
+                                  "Large Particles Histogram"));
+}
 
 vector<Particle> GasContainer::small_particles() {
   return small_particles_;

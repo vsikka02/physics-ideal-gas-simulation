@@ -42,7 +42,7 @@ class Particle {
    * particle hit the container's walls.
    */
   void set_velocity_after_wall_collision(const glm::vec2& bounds_1,
-                                        const glm::vec2& bounds_2);
+                                         const glm::vec2& bounds_2);
 
   /**Return the mass of the particle.**/
   float mass() const;
@@ -60,7 +60,8 @@ class Particle {
    */
   bool IsColliding(const Particle& particle) const;
 
-  glm::vec2 CalculateCollidedVelocity(const Particle particle_1, int particle_number);
+  glm::vec2 CalculateCollidedVelocity(const Particle particle_1,
+                                      int particle_number);
 
  private:
   glm::vec2 position_;

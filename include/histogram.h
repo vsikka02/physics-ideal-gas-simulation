@@ -55,6 +55,7 @@ class Histogram {
   void set_bin_heights(std::vector<int> bin_heights);
 
  private:
+  /** These are all the instance fields needed to generate a histogram. **/
   std::vector<Particle> particles_;
   vec2 line_bound_1_;
   vec2 line_bound_2_;
