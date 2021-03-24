@@ -18,7 +18,7 @@ class Histogram {
   /** This constructs a histogram object that plots the speed of the particles
    * at the location described by line bounds and for the particles that are passed
    * in as the particles vector. **/
-  Histogram(std::vector<Particle> particles, vec2 line_bound_1, vec2 line_bound_2, ci::Color color, std::string title);
+  Histogram(const std::vector<Particle>& particles, const vec2& line_bound_1, const vec2& line_bound_2, const ci::Color& color, const std::string& title, const int number_bins);
 
   /** This method draws out the histogram with the Axes, Labels and the
    * bars for the histogram plot. **/
@@ -52,7 +52,7 @@ class Histogram {
   std::vector<int> bin_heights() const;
 
   /** Setter for the Bin Heights vector. Mainly used to make testing easier. **/
-  void set_bin_heights(std::vector<int> bin_heights);
+  void set_bin_heights(const std::vector<int> bin_heights);
 
  private:
   /** These are all the instance fields needed to generate a histogram. **/
@@ -62,10 +62,7 @@ class Histogram {
   std::vector<int> bin_heights_;
   ci::Color color_;
   std::string title_;
-
-  /** Number of Bins that are present in histogram. For Testing this variable
-   * must be set to 5 or else testing will fail. **/
-  const int kNumberOfBins = 5;
+  int number_bins_;
 };
 }
 //namespace idealgas

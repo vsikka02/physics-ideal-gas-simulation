@@ -119,15 +119,15 @@ void GasContainer::set_histogram_vector() {
 
   histograms_.push_back(Histogram(small_particles_, vec2(45, 500),
                                   vec2(245, 700), kSmallParticleColor,
-                                  "Small Particles Histogram"));
+                                  "Small Particles Histogram", 5));
 
   histograms_.push_back(Histogram(medium_particles_, vec2(295, 500),
                                   vec2(495, 700), kMediumParticleColor,
-                                  "Medium Particles Histogram"));
+                                  "Medium Particles Histogram", 5));
 
   histograms_.push_back(Histogram(large_particles_, vec2(545, 500),
                                   vec2(745, 700), kLargeParticleColor,
-                                  "Large Particles Histogram"));
+                                  "Large Particles Histogram", 5));
 }
 
 vector<Particle> GasContainer::small_particles() {

@@ -15,13 +15,14 @@ using glm::vec2;
 
 namespace idealgas {
 
-Histogram::Histogram(std::vector<Particle> particles, vec2 line_bound_1,
-                     vec2 line_bound_2, ci::Color color, std::string title) {
+Histogram::Histogram(const std::vector<Particle>& particles, const vec2& line_bound_1,
+                     const vec2& line_bound_2, const ci::Color& color, const std::string& title, const int number_bins) {
   particles_ = particles;
   line_bound_1_ = line_bound_1;
   line_bound_2_ = line_bound_2;
   color_ = color;
-  bin_heights_ = std::vector<int>(kNumberOfBins);
+  number_bins_ = number_bins;
+  bin_heights_ = std::vector<int>(number_bins_);
   title_ = title;
 }
 
@@ -37,13 +38,13 @@ std::vector<int> Histogram::UpdateHistogram() {
 
   for (Particle particle : particles_) {
     if (glm::length(particle.velocity()) == FindMaximumSpeed()) {
-      bin_heights_[kNumberOfBins - 1]++;
+      bin_heights_[number_bins_ - 1]++;
     }
-    for (int i = 0; i < kNumberOfBins; i++) {
+    for (int i = 0; i < number_bins_; i++) {
       if (glm::length(particle.velocity()) >=
-              i * (FindMaximumSpeed() / kNumberOfBins) &&
+              i * (FindMaximumSpeed() / number_bins_) &&
           glm::length(particle.velocity()) <=
-              (i + 1) * (FindMaximumSpeed() / kNumberOfBins)) {
+              (i + 1) * (FindMaximumSpeed() / number_bins_)) {
         bin_heights_[i] += 1;
       }
     }
@@ -106,19 +107,19 @@ void Histogram::DrawTickMarks() const {
                        vec2(line_bound_1_.x - 20, line_bound_2_.y - (i)*mult));
   }
 
-  for (int i = 0; i < kNumberOfBins; i++) {
+  for (int i = 0; i < number_bins_; i++) {
     ci::gl::color(ci::Color("white"));
 
     ci::gl::drawLine(
         vec2(line_bound_1_.x +
-                 (i + 1) * (line_bound_2_.x - line_bound_1_.x) / kNumberOfBins,
+                 (i + 1) * (line_bound_2_.x - line_bound_1_.x) / number_bins_,
              line_bound_2_.y),
         vec2(line_bound_1_.x +
-                 (i + 1) * (line_bound_2_.x - line_bound_1_.x) / kNumberOfBins,
+                 (i + 1) * (line_bound_2_.x - line_bound_1_.x) / number_bins_,
              line_bound_2_.y + 5));
 
 
-    float num = i * (FindMaximumSpeed() / kNumberOfBins);
+    float num = i * (FindMaximumSpeed() / number_bins_);
     // https://stackoverflow.com/questions/29200635/convert-float-to-string-with-precision-number-of-decimal-digits-specified
 
     std::stringstream stream;
@@ -128,7 +129,7 @@ void Histogram::DrawTickMarks() const {
     ci::gl::drawString(
         s,
         vec2(line_bound_1_.x +
-                 (i + 1) * (line_bound_2_.x - line_bound_1_.x) / kNumberOfBins -
+                 (i + 1) * (line_bound_2_.x - line_bound_1_.x) / number_bins_ -
                  10,
              line_bound_2_.y + 20));
     ci::gl::color(color_);
@@ -136,10 +137,10 @@ void Histogram::DrawTickMarks() const {
 
     ci::gl::drawSolidRect(ci::Rectf(
         vec2(line_bound_1_.x +
-                 i * (line_bound_2_.x - line_bound_1_.x) / kNumberOfBins,
+                 i * (line_bound_2_.x - line_bound_1_.x) / number_bins_,
              line_bound_2_.y),
         vec2(line_bound_1_.x +
-                 (i + 1) * (line_bound_2_.x - line_bound_1_.x) / kNumberOfBins,
+                 (i + 1) * (line_bound_2_.x - line_bound_1_.x) / number_bins_,
              line_bound_2_.y - mult * bin_heights_[i])));
   }
 }

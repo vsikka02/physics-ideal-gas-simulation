@@ -40,12 +40,15 @@ class GasContainer {
    * information. **/
   void set_histogram_vector();
 
- private:
-  /** These are the size vectors and the histogram vectors. **/
+
+  /** These are the getters and setter for the size vectors and the
+   * histogram vectors. **/
   std::vector<Particle> small_particles();
   std::vector<Particle> medium_particles();
   std::vector<Particle> large_particles();
   std::vector<Histogram> histograms();
+
+ private:
 
 
   /**
