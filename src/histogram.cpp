@@ -28,7 +28,7 @@ Histogram::Histogram(const std::vector<Particle>& particles, const vec2& line_bo
 
 void Histogram::DrawHistogram() const {
   DrawAxesAndLabels();
-  DrawTickMarks();
+  DrawTickMarksAndBars();
 }
 
 std::vector<size_t> Histogram::UpdateHistogram() {
@@ -95,7 +95,7 @@ void Histogram::DrawAxesAndLabels() const {
                      vec2(line_bound_1_.x + 75, line_bound_2_.y + 40));
 }
 
-void Histogram::DrawTickMarks() const {
+void Histogram::DrawTickMarksAndBars() const {
   size_t mult =
       (line_bound_2_.y - line_bound_1_.y) / FindMaximumNumberOfParticlesInBin();
 

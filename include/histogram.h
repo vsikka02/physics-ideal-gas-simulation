@@ -43,7 +43,7 @@ class Histogram {
   /** This draws the tick marks that are present on the x and y axis of the
    * graphs and is dynamically updated based on the maximum bin size and the
    * maximum speed.**/
-  void DrawTickMarks() const;
+  void DrawTickMarksAndBars() const;
 
   /** Getter for the Particles Vector. **/
   std::vector<Particle> particles() const;
