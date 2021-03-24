@@ -42,7 +42,7 @@ class Histogram {
 
   /** This draws the tick marks that are present on the x and y axis of the
    * graphs and is dynamically updated based on the maximum bin size and the
-   * maximum speed.**/
+   * maximum speed. Also Draws the Histogram Bars.**/
   void DrawTickMarksAndBars() const;
 
   /** Getter for the Particles Vector. **/
