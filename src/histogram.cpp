@@ -16,13 +16,13 @@ using glm::vec2;
 namespace idealgas {
 
 Histogram::Histogram(const std::vector<Particle>& particles, const vec2& line_bound_1,
-                     const vec2& line_bound_2, const ci::Color& color, const std::string& title, const int number_bins) {
+                     const vec2& line_bound_2, const ci::Color& color, const std::string& title, const size_t number_bins) {
   particles_ = particles;
   line_bound_1_ = line_bound_1;
   line_bound_2_ = line_bound_2;
   color_ = color;
   number_bins_ = number_bins;
-  bin_heights_ = std::vector<int>(number_bins_);
+  bin_heights_ = std::vector<size_t>(number_bins_);
   title_ = title;
 }
 
@@ -31,8 +31,8 @@ void Histogram::DrawHistogram() const {
   DrawTickMarks();
 }
 
-std::vector<int> Histogram::UpdateHistogram() {
-  for (int i = 0; i < bin_heights_.size(); i++) {
+std::vector<size_t> Histogram::UpdateHistogram() {
+  for (size_t i = 0; i < bin_heights_.size(); i++) {
     bin_heights_[i] = 0;
   }
 
@@ -40,7 +40,7 @@ std::vector<int> Histogram::UpdateHistogram() {
     if (glm::length(particle.velocity()) == FindMaximumSpeed()) {
       bin_heights_[number_bins_ - 1]++;
     }
-    for (int i = 0; i < number_bins_; i++) {
+    for (size_t i = 0; i < number_bins_; i++) {
       if (glm::length(particle.velocity()) >=
               i * (FindMaximumSpeed() / number_bins_) &&
           glm::length(particle.velocity()) <=
@@ -65,10 +65,10 @@ float Histogram::FindMaximumSpeed() const {
   return maximum_speed;
 }
 
-int Histogram::FindMaximumNumberOfParticlesInBin() const {
-  int max_number_of_particles = 0;
+size_t Histogram::FindMaximumNumberOfParticlesInBin() const {
+  size_t max_number_of_particles = 0;
 
-  for (int i = 0; i < bin_heights_.size(); i++) {
+  for (size_t i = 0; i < bin_heights_.size(); i++) {
     if (bin_heights_[i] > max_number_of_particles) {
       max_number_of_particles = bin_heights_[i];
     }
@@ -96,10 +96,10 @@ void Histogram::DrawAxesAndLabels() const {
 }
 
 void Histogram::DrawTickMarks() const {
-  int mult =
+  size_t mult =
       (line_bound_2_.y - line_bound_1_.y) / FindMaximumNumberOfParticlesInBin();
 
-  for (int i = 0; i <= FindMaximumNumberOfParticlesInBin(); i++) {
+  for (size_t i = 0; i <= FindMaximumNumberOfParticlesInBin(); i++) {
     ci::gl::color(ci::Color("white"));
     ci::gl::drawLine(vec2(line_bound_1_.x - 5, line_bound_2_.y - (i)*mult),
                      vec2(line_bound_1_.x, line_bound_2_.y - (i)*mult));
@@ -107,7 +107,7 @@ void Histogram::DrawTickMarks() const {
                        vec2(line_bound_1_.x - 20, line_bound_2_.y - (i)*mult));
   }
 
-  for (int i = 0; i < number_bins_; i++) {
+  for (size_t i = 0; i < number_bins_; i++) {
     ci::gl::color(ci::Color("white"));
 
     ci::gl::drawLine(
@@ -149,11 +149,11 @@ std::vector<Particle> Histogram::particles() const {
   return particles_;
 }
 
-std::vector<int> Histogram::bin_heights() const {
+std::vector<size_t> Histogram::bin_heights() const {
   return bin_heights_;
 }
 
-void Histogram::set_bin_heights(std::vector<int> bin_heights) {
+void Histogram::set_bin_heights(std::vector<size_t> bin_heights) {
   bin_heights_ = bin_heights;
 }
 }  // namespace idealgas

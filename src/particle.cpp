@@ -11,7 +11,7 @@ using glm::vec2;
 
 Particle::Particle(const vec2& position, const vec2& velocity,
                    const ci::Color& color, const float& mass,
-                   const int& radius) {
+                   const size_t radius) {
   position_ = position;
   velocity_ = velocity;
   color_ = color;
@@ -19,7 +19,7 @@ Particle::Particle(const vec2& position, const vec2& velocity,
   mass_ = mass;
 }
 
-int Particle::radius() const {
+size_t Particle::radius() const {
   return radius_;
 }
 
@@ -88,7 +88,7 @@ bool Particle::IsColliding(const Particle& particle) const {
   return false;
 }
 
-vec2 Particle::CalculateCollidedVelocity(const Particle particle_2, int particle_number) {
+vec2 Particle::CalculateCollidedVelocity(const Particle particle_2, const size_t particle_number) {
   vec2 v_1 = velocity_;
   vec2 v_2 = particle_2.velocity();
   vec2 x_1 = position_;

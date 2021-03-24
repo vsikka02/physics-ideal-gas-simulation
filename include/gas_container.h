@@ -73,9 +73,9 @@ class GasContainer {
 
   /** These are all of the constants that are set for having 3 different sized
    * particle objects. These can be changed. **/
-  const int kLargeParticleRadius = 10;
-  const int kMediumParticleRadius = 7;
-  const int kSmallParticleRadius = 5;
+  const size_t kLargeParticleRadius = 10;
+  const size_t kMediumParticleRadius = 7;
+  const size_t kSmallParticleRadius = 5;
   const ci::Color kLargeParticleColor = ci::Color("green");
   const ci::Color kMediumParticleColor = ci::Color("blue");
   const ci::Color kSmallParticleColor = ci::Color("pink");

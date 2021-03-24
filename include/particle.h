@@ -14,7 +14,7 @@ class Particle {
    * vector for velocity, a color, a mass, and a radius to generate a particle.
    */
   Particle(const glm::vec2& position, const glm::vec2& velocity,
-           const ci::Color& color, const float& mass_, const int& radius_);
+           const ci::Color& color, const float& mass_, const size_t radius_);
 
   /**Return the color of a particle.**/
   ci::Color color() const;
@@ -34,7 +34,7 @@ class Particle {
   void UpdatePosition();
 
   /**Return the radius size.**/
-  int radius() const;
+  size_t radius() const;
 
   /**
    * This functions intakes the bounds of the rectangle that the particles will
@@ -61,13 +61,13 @@ class Particle {
   bool IsColliding(const Particle& particle) const;
 
   glm::vec2 CalculateCollidedVelocity(const Particle particle_1,
-                                      int particle_number);
+                                      const size_t particle_number);
 
  private:
   glm::vec2 position_;
   glm::vec2 velocity_;
   ci::Color color_;
   float mass_;
-  int radius_;
+  size_t radius_;
 };
 }  // namespace idealgas

@@ -65,7 +65,7 @@ TEST_CASE("Test Maximum Particles in Bin Function") {
 
   Histogram histogram = Histogram(particles, vec2(100, 100), vec2(300, 300),
                                   ci::Color("red"), "Test Histogram", 5);
-  histogram.set_bin_heights(std::vector<int>{2, 3, 4, 5, 8});
+  histogram.set_bin_heights(std::vector<size_t>{2, 3, 4, 5, 8});
 
   REQUIRE(histogram.FindMaximumNumberOfParticlesInBin() == 8);
 }
